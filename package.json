@@ -6,7 +6,9 @@
     "start": "webpack serve --env development",
     "test": "jest --coverage",
     "build": "webpack --env production",
-    "lint": "eslint ."
+    "lint": "eslint .", 
+    "lint:fix": "eslint . --fix"
+    
   },
   "repository": {
     "type": "git",

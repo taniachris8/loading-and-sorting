@@ -1,4 +1,4 @@
 module.exports = {
-  mode: "development",
-  devServer: { port: 9000 },
+    mode: "development",
+    devServer: { port: 9000 },
 };
