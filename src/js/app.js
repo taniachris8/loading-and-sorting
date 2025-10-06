@@ -81,27 +81,32 @@ function sortMovie(parameter, arrow, direction) {
     headTitles[index].innerHTML = `
             ${parameter} <img src=${arrow} alt="arrow-down" class="arrow">
           `;
-    
-    if (direction === "descending") {
-        const sortedArray = movieRows.sort(
-            (a, b) => Number(a.dataset[parameter]) - Number(b.dataset[parameter])
-        );
-        sortedArray.forEach((row) => table.append(row));
-    } else { 
-        const sortedArray = movieRows.sort(
-            (a, b) => Number(b.dataset[parameter]) - Number(a.dataset[parameter])
-        );
-        sortedArray.forEach((row) => table.append(row));
-    }
+
+    const sortedArray = movieRows.sort((a, b) => {
+        if (!isNaN(a.dataset[parameter]) && !isNaN(b.dataset[parameter])) {
+            return direction === "descending"
+                ? Number(a.dataset[parameter]) - Number(b.dataset[parameter])
+                : Number(b.dataset[parameter]) - Number(a.dataset[parameter]);
+        }
+        return direction === "descending"
+            ? a.dataset[parameter].localeCompare(b.dataset[parameter], "ru")
+            : b.dataset[parameter].localeCompare(a.dataset[parameter], "ru");
+    });
+
+    sortedArray.forEach((row) => table.append(row));
 }
 
-setInterval(() => { 
-    setTimeout(() => sortMovie("id", arrowDown, "descending"), 0);
-    setTimeout(() => sortMovie("id", arrowUp), 2000);
-    setTimeout(() => sortMovie("title", arrowDown, "descending"), 4000);
-    setTimeout(() => sortMovie("title", arrowUp), 6000);
-    setTimeout(() => sortMovie("year", arrowDown, "descending"), 8000);
-    setTimeout(() => sortMovie("year", arrowUp), 10000);
-    setTimeout(() => sortMovie("imdb", arrowDown, "descending"), 12000);
-    setTimeout(() => sortMovie("imdb", arrowUp), 14000);
-}, 2000);
+function runTimeouts() { 
+    setTimeout(() => sortMovie("id", arrowDown, "descending"), 2000);
+    setTimeout(() => sortMovie("id", arrowUp, "ascending"), 4000);
+    setTimeout(() => sortMovie("title", arrowDown, "descending"), 6000);
+    setTimeout(() => sortMovie("title", arrowUp, "ascending"), 8000);
+    setTimeout(() => sortMovie("year", arrowDown, "descending"), 10000);
+    setTimeout(() => sortMovie("year", arrowUp, "ascending"), 12000);
+    setTimeout(() => sortMovie("imdb", arrowDown, "descending"), 14000);
+    setTimeout(() => sortMovie("imdb", arrowUp, "ascending"), 16000);
+
+    setTimeout(runTimeouts, 16000 + 2000);
+}
+
+runTimeouts();
