@@ -84,11 +84,11 @@ function sortMovie(parameter, arrow, direction) {
 
     const sortedArray = movieRows.sort((a, b) => {
         if (!isNaN(a.dataset[parameter]) && !isNaN(b.dataset[parameter])) {
-            return direction === "descending"
+            return direction === "ascending"
                 ? Number(a.dataset[parameter]) - Number(b.dataset[parameter])
                 : Number(b.dataset[parameter]) - Number(a.dataset[parameter]);
         }
-        return direction === "descending"
+        return direction === "ascending"
             ? a.dataset[parameter].localeCompare(b.dataset[parameter], "ru")
             : b.dataset[parameter].localeCompare(a.dataset[parameter], "ru");
     });
@@ -97,14 +97,14 @@ function sortMovie(parameter, arrow, direction) {
 }
 
 function runTimeouts() { 
-    setTimeout(() => sortMovie("id", arrowDown, "descending"), 2000);
-    setTimeout(() => sortMovie("id", arrowUp, "ascending"), 4000);
-    setTimeout(() => sortMovie("title", arrowDown, "descending"), 6000);
-    setTimeout(() => sortMovie("title", arrowUp, "ascending"), 8000);
-    setTimeout(() => sortMovie("year", arrowDown, "descending"), 10000);
-    setTimeout(() => sortMovie("year", arrowUp, "ascending"), 12000);
-    setTimeout(() => sortMovie("imdb", arrowDown, "descending"), 14000);
-    setTimeout(() => sortMovie("imdb", arrowUp, "ascending"), 16000);
+    setTimeout(() => sortMovie("id", arrowDown, "ascending"), 2000);
+    setTimeout(() => sortMovie("id", arrowUp, "descending"), 4000);
+    setTimeout(() => sortMovie("title", arrowDown, "ascending"), 6000);
+    setTimeout(() => sortMovie("title", arrowUp, "descending"), 8000);
+    setTimeout(() => sortMovie("year", arrowDown, "ascending"), 10000);
+    setTimeout(() => sortMovie("year", arrowUp, "descending"), 12000);
+    setTimeout(() => sortMovie("imdb", arrowDown, "ascending"), 14000);
+    setTimeout(() => sortMovie("imdb", arrowUp, "descending"), 16000);
 
     setTimeout(runTimeouts, 16000 + 2000);
 }
